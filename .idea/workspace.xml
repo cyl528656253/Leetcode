@@ -2,28 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="74a5acde-bf1b-4a6e-a409-63b1c10fc97c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Atomic/AtomicDemo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/SynDemo/ReenTrantLockDemo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/SynDemo/Singleton.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/SynDemo/SynDemo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/SynDemo/SynchronizedDemo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/SynDemo/VolatileDemo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/dataStruct/DataStruct.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/leetcode/Interval.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/leetcode/MinStack.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/leetcode/TreeNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/leetcode/Trie.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/threadDemo/CallableDemo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/threadDemo/ThreadUseObjectFunctionDemo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/threadDemo/aqs/CountDownLatchDemo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/threadDemo/aqs/SemaphoreDemo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/threadDemo/aqs/SemaphoreDome2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/threadPool/CallableDemo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/threadPool/ThreadPoolDemo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../testcai/src/com/company/test3.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MyBatis/src/main/java/com/cai/demo/controller/MyBatisController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MyBatis/src/main/java/com/cai/demo/controller/MyBatisController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cssm/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/leetcode/Leetcode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/leetcode/Leetcode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../testcai/src/com/company/test3.java" beforeDir="false" afterPath="$PROJECT_DIR$/../testcai/src/com/company/test3.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,21 +22,22 @@
     <session id="-1379550452">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="23" />
+          <entry key="project.closed" value="25" />
           <entry key="project.open.time.0" value="3" />
           <entry key="project.open.time.1" value="3" />
           <entry key="project.open.time.10" value="5" />
           <entry key="project.open.time.11" value="3" />
           <entry key="project.open.time.12" value="3" />
-          <entry key="project.open.time.14" value="1" />
+          <entry key="project.open.time.13" value="1" />
+          <entry key="project.open.time.14" value="2" />
           <entry key="project.open.time.16" value="1" />
           <entry key="project.open.time.19" value="1" />
-          <entry key="project.open.time.2" value="2" />
+          <entry key="project.open.time.2" value="3" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.8" value="2" />
           <entry key="project.open.time.9" value="2" />
-          <entry key="project.opened" value="28" />
+          <entry key="project.opened" value="31" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -69,12 +53,12 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="6" />
-          <entry key="java" value="35299" />
+          <entry key="java" value="36366" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="35299" />
+          <entry key="JAVA" value="36366" />
           <entry key="PLAIN_TEXT" value="6" />
         </counts>
       </usages-collector>
@@ -85,8 +69,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/leetcode/Leetcode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="454">
-              <caret line="1751" column="5" lean-forward="true" selection-start-line="1751" selection-start-column="5" selection-end-line="1751" selection-end-column="5" />
+            <state relative-caret-position="397">
+              <caret line="1802" column="17" selection-start-line="1802" selection-start-column="17" selection-end-line="1802" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -131,8 +115,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/dataStruct/DataStruct.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4142">
-              <caret line="218" column="9" lean-forward="true" selection-start-line="218" selection-start-column="9" selection-end-line="218" selection-end-column="9" />
+            <state relative-caret-position="4123">
+              <caret line="218" column="9" selection-start-line="218" selection-start-column="9" selection-end-line="218" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -208,7 +192,7 @@
     </findStrings>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -317,8 +301,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -467,16 +451,20 @@
       <workItem from="1553011744055" duration="5613000" />
       <workItem from="1553128613764" duration="17338000" />
       <workItem from="1553329755652" duration="5423000" />
+      <workItem from="1553358982491" duration="28000" />
+      <workItem from="1553413394676" duration="609000" />
+      <workItem from="1553415729196" duration="3665000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="153949000" />
+    <option name="totallyTimeSpent" value="158251000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4989605" visible="true" weight="0.20978552" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4989605" visible="true" weight="0.21782842" />
       <window_info id="Image Layers" order="1" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -632,6 +620,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/leetcode/Leetcode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="397">
+          <caret line="1802" column="17" selection-start-line="1802" selection-start-column="17" selection-end-line="1802" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/leetcode/ListNode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
@@ -654,6 +652,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="646">
           <caret line="36" selection-start-line="36" selection-end-line="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/dataStruct/DataStruct.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4123">
+          <caret line="218" column="9" selection-start-line="218" selection-start-column="9" selection-end-line="218" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -698,26 +706,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5358">
           <caret line="326" column="7" selection-start-line="326" selection-start-column="7" selection-end-line="326" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dataStruct/DataStruct.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4142">
-          <caret line="218" column="9" lean-forward="true" selection-start-line="218" selection-start-column="9" selection-end-line="218" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/leetcode/Leetcode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="454">
-          <caret line="1751" column="5" lean-forward="true" selection-start-line="1751" selection-start-column="5" selection-end-line="1751" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

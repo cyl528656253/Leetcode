@@ -1752,6 +1752,71 @@ public class Leetcode {
     }
 
 
+    //416. Partition Equal Subset Sum
+    public boolean canPartition(int[] nums) {
+        int sum = 0;
+        for (int num : nums) {
+            sum += num;
+        }
+        if (sum % 2 == 1) return false;
+        int target = sum/2;
+        Arrays.sort(nums);
+        return dfs(nums, 0, target);
+    }
+
+    boolean dfs(int[] nums, int pos, int target) {
+        if (target == 0) return true;
+        for (int i = pos; i < nums.length; ++i) {
+            if (i > pos && nums[i] == nums[i-1]) continue;
+            if (nums[i] > target) break;
+            if (dfs(nums, i+1, target-nums[i])) return true;
+        }
+        return false;
+    }
+
+    //394. Decode String
+
+    public String decodeString(String s) {
+        StringBuilder stringBuilder = new StringBuilder();
+        Stack<Integer> number = new Stack<>();
+        Stack<String> characters = new Stack<>();
+
+        for (int i = 0; i < s.length(); i++){
+            char c = s.charAt(i);
+            if (c >= '0' && c<= '9'){
+                int j = i;
+                int value =0;
+                char tmp = s.charAt(j);
+                while (tmp >= '0' && tmp <= '9'){
+                    value = value * 10 + (tmp - '0');
+                    j++;
+                    tmp = s.charAt(j);
+                }
+                i = j - 1;
+                number.push(value);
+            }else if (c == '['){
+                characters.push(stringBuilder.toString());
+                stringBuilder.delete(0,stringBuilder.length());
+            }else if(c == ']'){
+                StringBuilder tmp = new StringBuilder(characters.pop());
+                int value = number.pop();
+               // String str = characters.pop();
+                for (int x = 0; x < value; x++){
+                    tmp.append(stringBuilder);
+                }
+                stringBuilder = tmp;
+                System.out.println(tmp.toString());
+            }else {
+                stringBuilder.append(c);
+            }
+        }
+        return stringBuilder.toString();
+
+    }
+
+
+
+
 
 
 }
