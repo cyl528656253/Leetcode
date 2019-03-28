@@ -12,10 +12,46 @@ public class Leetcode {
 
 
     public static void main(String[] args){
-        String s = "1234556";
-        System.out.println(s.substring(0,1));
+       HashSet<Integer> hashset = new HashSet<>();
+       hashset.add(1);
+       hashset.add(2);
+       for (int i : hashset){
+           System.out.println((int)(i));
+       }
+    }
+
+    //将给定的数转换为字符串，原则如下：1对应a，2对应b，…，26对应z。 abbeh”,”aveh”,”abyh”,”lbeh”,”lyh”
+    //编写函数给出可以转换的字符串的个数。
+    public void replace(String str){
+        if (str.length() == 0)
+            return;
+
+        dfs(str,0,"");
+    }
+
+    public void dfs(String s,int index,String result){
+        if (index >= s.length()){
+            System.out.println(result);
+            return;
+        }
+
+        int number = s.charAt(index) - '0';
+        if (number >= 1 && number <= 26 ) {
+            char c = (char) ('a' + number - 1);
+            dfs(s, index + 1, result + c);
+        }
+
+        if (index + 1 < s.length()){
+            int number2 = s.charAt(index+1) - '0';
+            int value = number * 10 + number2;
+            char c = (char)('a' + value - 1);
+            if (c <= 'z' && c>= 'a')
+             dfs(s, index + 2, result + c);
+        }
 
     }
+
+
 
     public String replaceSpace(StringBuffer str) {
 
@@ -1815,8 +1851,52 @@ public class Leetcode {
     }
 
 
+    //437. Path Sum III
+    //递归加 组合结果  首先我一个状态有左右子节点的解之和在加上根节点的递归得到
+    //第二条思路   把数转换为数组进行求解  先使用先序遍历
+    public int pathSum(TreeNode root, int sum) {
+        if(root == null) return 0;
+        return dfs(root,sum,0) + pathSum(root.left,sum) + pathSum(root.right,sum);
+
+    }
+
+    public int dfs(TreeNode root, int target, int sum){  //表示左右孩子中内有多少条路劲
+        if(root == null) return 0;
+        int cur = root.val + sum;
+        int flag = cur == target? 1 : 0;
+        return flag + dfs(root.left,target,cur) + dfs(root.right,target,cur);
+    }
 
 
+
+    //438. Find All Anagrams in a String  求出我们两个二进制数不同的位数  <<补上0  >>补上符号位  >>>补0
+    /*
+    * <<：左移运算符，num << 1,相当于num乘以2
+    *  >>：右移运算符，num >> 1,相当于num除以2
+    *  >>>：无符号右移，忽略符号位，空位都以0补齐
+    * */
+    public int hammingDistance(int x, int y) {
+        int xor = x ^ y, count = 0;
+        for (int i = 0; i < 32; i++) count += (xor >> i) & 1;
+        return count;
+    }
+
+    //538. Convert BST to  Tree
+    public TreeNode convertBST(TreeNode root) {
+        int[] sum = {0};
+        dfs(root,sum);
+        return  root;
+    }
+
+    public void dfs(TreeNode root,int[] sum){
+        if (root == null) return ;
+        dfs(root.right,sum);
+        root.val += sum[0];
+        sum[0] = root.val;
+        dfs(root.left,sum);
+
+
+    }
 
 
 }
