@@ -1881,6 +1881,25 @@ public class Leetcode {
         return count;
     }
 
+
+
+    //448. Find All Numbers Disappeared in an Array
+    public List<Integer> findDisappearedNumbers(int[] nums) {
+        LinkedList<Integer> result = new LinkedList<>();
+        for (int i = 0; i < nums.length; i++){
+            while(nums[i]!=i+1&&nums[nums[i]-1]!=nums[i])
+            {
+                swap(nums,i,nums[i]-1);
+            }
+        }
+        for (int i = 0; i < nums.length; i++){
+            System.out.print(nums[i]+" ");
+            if (nums[i] != i+1)
+                result.addLast(i+1);
+        }
+        return result;
+    }
+
     //538. Convert BST to  Tree
     public TreeNode convertBST(TreeNode root) {
         int[] sum = {0};
