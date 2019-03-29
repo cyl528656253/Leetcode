@@ -1894,9 +1894,30 @@ public class Leetcode {
         root.val += sum[0];
         sum[0] = root.val;
         dfs(root.left,sum);
-
-
     }
+
+    //494. Target Sum
+    //方法一  递归
+    public int findTargetSumWays(int[] nums, int S) {
+        int[] ans = {0};
+
+        dfsFindTargetSumWays(0,nums,0,S,ans);
+        return ans[0];
+    }
+    public void dfsFindTargetSumWays(int index,int[] nums,long sum,int s,int[] ans){
+        if (index >= nums.length){
+            if (sum == s) ans[0]++;
+            return;
+        }
+        dfsFindTargetSumWays(index+1,nums,sum+nums[index],s,ans);
+        dfsFindTargetSumWays(index+1,nums,sum-nums[index],s,ans);
+    }
+
+
+    //方法三  动态规划  背包+滚动数据
+
+
+
 
 
 }
