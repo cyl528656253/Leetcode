@@ -1986,6 +1986,55 @@ public class Leetcode {
     }
 
 
+    //572. Subtree of Another Tree
+    public boolean isSubtree(TreeNode s, TreeNode t) {
+        if(s ==null && t ==null) return true;
+        if(s == null)
+            return false;
+
+        boolean flag = dfsIsSubtree(s,t);
+        if(flag) return true;
+        else{
+            return isSubtree(s.left,t) || isSubtree(s.right,t);
+        }
+
+    }
+
+    public boolean dfsIsSubtree(TreeNode root, TreeNode t){
+        if(root == null && t == null)  return true;
+        if(root == null || t == null) return false;
+
+        if(root.val == t.val)
+            return dfsIsSubtree(root.left,t.left) && dfsIsSubtree(root.right,t.right);
+        else return false;
+    }
+
+    //560. Subarray Sum Equals K
+    /*
+    * 方法一  我们先用一个dp【i】 数组 记录从0 到 i 的和  计算从j到k的和就使用dp【k】 - dp【i】
+    *
+    * 方法二 建立在方法一之上  我们使用hashmap 表示到达数字sum的方法有多少  当我能到达sum时，我们我去查阅到达sum-k的方法有多少
+    *                           这样的话  我们就能得到能加和到k的方法有多少
+    * */
+    public int subarraySum(int[] nums, int k) {
+
+        HashMap<Integer,Integer> hashMap = new HashMap<>();
+        hashMap.put(0,1);
+        int sum = 0;
+        int result = 0;
+        for(int num : nums){
+            sum += num;
+            int waysKey = sum - k;
+            result +=  hashMap.get(waysKey) == null? 0 : hashMap.get(waysKey);
+            if (!hashMap.containsKey(sum)) hashMap.put(sum,1);
+            else  hashMap.replace(sum,hashMap.get(sum)+1);
+
+        }
+
+        return  result;
+
+    }
+
 
 
 }
