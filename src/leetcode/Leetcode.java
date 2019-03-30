@@ -1933,8 +1933,57 @@ public class Leetcode {
     }
 
 
-    //方法三  动态规划  背包+滚动数据
 
+    //438. Find All Anagrams in a String  哈希加滑动窗口
+    public <slen> List<Integer> findAnagrams(String s, String p) {
+        ArrayList<Integer> result = new ArrayList<>();
+        if (s.length() == 0) return result;
+
+        int[] hashMap = new int[128];
+        char[] ss = s.toCharArray();
+        char[] pp = p.toCharArray();
+        for (char c : pp) hashMap[c]++;
+        int i = 0;
+
+        while (i < ss.length - pp.length + 1){
+            boolean success = true;
+            int[] map = new int[128];
+
+            for (int j = 0;j < 128; j++) map[j] = hashMap[j];
+
+            for (int j = i; j < i + pp.length ; ++j) {
+                if (--map[ss[j]] < 0) {
+                    success = false;
+                    break;
+                }
+            }
+            if (success)
+                result.add(i);
+
+            i++;
+
+        }
+
+        return result;
+    }
+
+    //543. Diameter of Binary Tree  计算出二叉树直径长度  即任意两个结点形成最大长度  是一道求树深度的变形
+    public int diameterOfBinaryTree(TreeNode root) {
+        int[] result = new int[1];
+        result[0] = 0;
+        deptDiameterOfBinaryTree(root,result);
+        return result[0];
+
+    }
+
+    public int deptDiameterOfBinaryTree(TreeNode root,int[] result){
+        if (root ==null) return 0;
+        int left = deptDiameterOfBinaryTree(root.left,result);
+        int right = deptDiameterOfBinaryTree(root.right,result);
+        int sum = left +right ;
+        result[0] = result[0] >sum ? result[0]:sum;
+        return  left > right ? left+1:right+1;
+    }
 
 
 
