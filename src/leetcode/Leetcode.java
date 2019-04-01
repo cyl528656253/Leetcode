@@ -2032,9 +2032,137 @@ public class Leetcode {
         }
 
         return  result;
+    }
 
+    //581. Shortest Unsorted Continuous Subarray
+    // 自己的思路  既然让我想出我们需要排序的数目，那么我们先把数组排序  首尾不符合的那一段区间就是所求
+    //网上大部分思路都是如此
+    public int findUnsortedSubarray(int[] nums) {
+        int[] tmp = new int[nums.length];
+        for (int i = 0; i < nums.length; i++)
+            tmp[i] = nums[i];
+
+        Arrays.sort(tmp);
+        int ans = 0;
+        int left = 0;
+        int right = nums.length - 1;
+        while(left <= right){
+            if (tmp[left] == nums[left]){
+                ans++;
+                left++;
+            }else
+                break;
+        }
+
+        while(left <= right){
+            if (tmp[right] == nums[right]){
+                ans++;
+                right--;
+            }
+            else break;
+        }
+        return  nums.length - ans;
     }
 
 
+    //617. Merge Two Binary Trees
+    //第一感觉递归专题   我的思路  --》 =把两树进行加和  构建出一颗新的树
+    //leetcode  速度最快的思路   把t2树加载t1之上
+    public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
+        if (t1 == null && t2 == null)
+            return null;
+
+        TreeNode root = new TreeNode(getTreeNodeValue(t1,t2));
+        if (t1 == null){
+            root.left = mergeTrees(null,t2.left);
+            root.right = mergeTrees(null,t2.right);
+        }else if (t2 == null){
+            root.left = mergeTrees(t1.left,null);
+            root.right = mergeTrees(t1.right,null);
+        }
+        else {
+            root.left = mergeTrees(t1.left,t2.left);
+            root.right = mergeTrees(t1.right,t2.right);
+        }
+
+        return  root;
+        /*
+        if(t1 == null)
+            return t2;
+        if(t2 == null)
+            return t1;
+        t1.val += t2.val;
+        t1.left = mergeTrees(t1.left,t2.left);
+        t1.right = mergeTrees(t1.right,t2.right);
+        return t1;
+        */
+    }
+    public int getTreeNodeValue(TreeNode t1, TreeNode t2){
+        int v1 = 0;
+        int v2 = 0;
+        if (t1 != null) v1 = t1.val;
+        if (t2 != null) v2 = t2.val;
+        return v1+v2;
+    }
+
+    //771. Jewels and Stones
+    //自己的思路  ---》 直接遍历 建立一个hashmap  直接求得   一半大家都能想到的思路
+    public int numJewelsInStones(String J, String S) {
+        int[] hashMap = new int[128];
+        for (int i = 0; i < J.length(); i++){
+            hashMap[J.charAt(i)]++;
+        }
+
+        int ans = 0;
+        for (int i = 0; i < S.length(); i++){
+            if (hashMap[S.charAt(i)]  > 0)
+                ans++;
+        }
+        return ans;
+    }
+
+    //647. Palindromic Substrings
+    //思路一  比较普通的思路 从中心向四周扩散的的算法  不过要分奇数偶数
+    public int countSubstrings(String s) {
+
+        int ans = 0;
+        for (int i = 0; i < s.length(); i++){
+            ans += count(s,i,i);
+            ans += count(s,i,i+1);
+        }
+        return ans;
+
+    }
+
+    public int count(String s,int begin,int end){
+        int ans = 0;
+        while (begin >= 0 && end < s.length() && s.charAt(begin) == s.charAt(end)){
+            ans++;
+
+            begin--;
+            end++;
+        }
+        return ans;
+    }
+
+    //621. Task Scheduler
+    //把我们的频率最高的任务进行分块
+    /*
+    c[25]是出现最多的字母数，所以(c[25] - 1)是分块数,例如A（4）次数最多，间隔n（3）(A***A***A***A)则重复的段落数为4-1=3。间隔是n，包含领头的A在内，每个间隔的长度是n+1=3+1=4.
+所以整个段落长度是(c[25] - 1) * (n + 1)。因为出现频率最高的元素可能不止一个，我们假设为k个，那么这种情况下最终的时间需求为：(c[25]-1)*（n+1）+k
+    或者最终的长度为任务的数量。
+    * */
+    public int leastInterval(char[] tasks, int n) {
+        int[] c = new int[26];
+        for(char t : tasks){
+            c[t - 'A']++;
+        }
+        Arrays.sort(c);
+        int i = 25;
+        while(i >= 0 && c[i] == c[25]) i--;
+
+        return Math.max(tasks.length, (c[25] - 1) * (n + 1) + 25 - i);
+    }
+    //581、617,711 647   621
 
 }
