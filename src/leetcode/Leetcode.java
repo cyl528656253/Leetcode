@@ -2165,7 +2165,7 @@ public class Leetcode {
     }
     //581、617,711 647   621
 
-    // Median of Two Sorted Arrays
+    //4 Median of Two Sorted Arrays
     //方法一  可以先归并成一个有序数组 然后直接获取中位数
     //方法二  类二分查找  下面代码即是
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
@@ -2182,8 +2182,89 @@ public class Leetcode {
             return findKth(nums1, i + k / 2, nums2, j, k - k / 2);
 
         return findKth(nums1, i, nums2, j + k / 2, k - k / 2);
+    }
 
+    //10. Regular Expression Matching
+    /**
+     * 一 、 这是一道关于有限自动状态机的题目   正则表达式  用p去匹配s  s使用的是回溯法
+     *
+     * 二 、 这道题还可以使用动态规划
+     */
+    public boolean isMatch(String s, String p) {
+        if (s == null || p == null)
+            return false;
+        if (s.length() == 0 && p.length() == 0)
+            return true;
 
+        return match(s,0,p,0);
+
+    }
+    public  boolean match(String s,int indexS,String p,int indexP){
+        if (indexS == s.length() && indexP == p.length())
+            return  true;
+
+        if (indexS != s.length() && indexP == p.length()){
+            return false;
+        }
+        if (indexS == s.length() && indexP != p.length()){
+            return false;
+        }
+
+        if (indexP + 1 < p.length() &&  p.charAt(indexP+1) == '*' && indexS < s.length()){
+            //匹配上了-》 字符
+            if (p.charAt(indexP) == s.charAt(indexS) || (p.charAt(indexP) == '.' && indexS != s.length()) ){
+                return match(s,indexS+1,p,indexP+2) ||
+                        match(s,indexS+1,p,indexP) ||
+                        match(s,indexS,p,indexP+2);
+            }
+            else
+                return match(s,indexS,p,indexP+2);  //匹配不上  当做* 不存在
+
+        }
+
+        if (indexS < s.length() && s.charAt(indexS) == p.charAt(indexP) || (p.charAt(indexP) == '.' && indexS != s.length()))
+            return match(s,indexS+1,p,indexP+1);
+
+        return false;
+
+    }
+
+    //第二种思路： 使用动态规划
+
+    private static boolean isMatch_dp(String s, String p) {
+        if (s == null || p == null) {
+            return false;
+        }
+        int m = s.length(), n = p.length();
+        boolean[][] dp = new boolean[m + 1][n + 1];
+        dp[0][0] = true;
+        for (int i = 1; i < n; i++) { // 初始化第一行，p匹配s = ""
+            if (p.charAt(i) == '*' && dp[0][i - 1]) {
+                dp[0][i + 1] = true;
+            }
+        }
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                // p[j - 1]不是"*"的情况，单字符匹配
+                if (p.charAt(j - 1) == '.' || p.charAt(j - 1) == s.charAt(i - 1)) {
+                    dp[i][j] = dp[i - 1][j - 1];
+                }
+                // p[j - 1]是"*"的情况，则要判断p[j - 2]是否匹配当前s[i - 1]
+                // 若不匹配，则p[j - 1]匹配空字符串
+                // 否则，有三种情况：
+                //   1.p[j - 1]匹配空字符串；
+                //   2.p[j - 1]匹配单一s[i - 1]字符；
+                //   3.p[j - 1]匹配多个s[i - 1]字符
+                if (p.charAt(j - 1) == '*') {
+                    if (p.charAt(j - 2) != s.charAt(i - 1) && p.charAt(j - 2) != '.') {
+                        dp[i][j] = dp[i][j - 2];
+                    } else {
+                        dp[i][j] = dp[i][j - 2] || dp[i][j - 1] || dp[i - 1][j];
+                    }
+                }
+            }
+        }
+        return dp[m][n];
     }
 
 
