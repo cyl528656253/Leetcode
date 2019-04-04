@@ -2191,44 +2191,31 @@ public class Leetcode {
      * 二 、 这道题还可以使用动态规划
      */
     public boolean isMatch(String s, String p) {
-        if (s == null || p == null)
-            return false;
-        if (s.length() == 0 && p.length() == 0)
-            return true;
-
-        return match(s,0,p,0);
-
+        return check(s.toCharArray(),0,p.toCharArray(),0);
     }
-    public  boolean match(String s,int indexS,String p,int indexP){
-        if (indexS == s.length() && indexP == p.length())
-            return  true;
-
-        if (indexS != s.length() && indexP == p.length()){
-            return false;
-        }
-        if (indexS == s.length() && indexP != p.length()){
-            return false;
-        }
-
-        if (indexP + 1 < p.length() &&  p.charAt(indexP+1) == '*' && indexS < s.length()){
-            //匹配上了-》 字符
-            if (p.charAt(indexP) == s.charAt(indexS) || (p.charAt(indexP) == '.' && indexS != s.length()) ){
-                return match(s,indexS+1,p,indexP+2) ||
-                        match(s,indexS+1,p,indexP) ||
-                        match(s,indexS,p,indexP+2);
+    public boolean check(char[] s,int i,char[] p,int j){
+        if(i==s.length&&j==p.length) return true;
+        if(i!=s.length&&j==p.length) return false;
+        if(j+1<p.length){//第二个不为空
+            if(i<s.length){//
+                if(p[j+1]=='*'){
+                    if(s[i]==p[j]||(p[j]=='.'&&i<s.length))
+                        return check(s,i+1,p,j+2)||check(s,i+1,p,j)||check(s,i,p,j+2);
+                    else
+                        return check(s,i,p,j+2);
+                }
             }
-            else
-                return match(s,indexS,p,indexP+2);  //匹配不上  当做* 不存在
-
+            else{//当i==s.length,j!=p.length 例如考虑s=a,p=ab*
+                if(j+1<p.length&&p[j+1]=='*')
+                    return check(s,i,p,j+2);
+                else return false;
+            }
         }
-
-        if (indexS < s.length() && s.charAt(indexS) == p.charAt(indexP) || (p.charAt(indexP) == '.' && indexS != s.length()))
-            return match(s,indexS+1,p,indexP+1);
-
-        return false;
-
+        if(i<s.length&&(s[i]==p[j]||p[j]=='.'))//因为最前面的if是判断j+1是否s.length，最后就判断最后一个字符
+            return check(s,i+1,p,j+1);
+        else
+            return false;
     }
-
     //第二种思路： 使用动态规划
 
     private static boolean isMatch_dp(String s, String p) {
