@@ -2223,7 +2223,7 @@ public class Leetcode {
             return false;
         }
         int m = s.length(), n = p.length();
-        boolean[][] dp = new boolean[m + 1][n + 1];
+        boolean[][] dp = new boolean[m + 1][n + 1];  // j 表示的 p   i表示的 s
         dp[0][0] = true;
         for (int i = 1; i < n; i++) { // 初始化第一行，p匹配s = ""
             if (p.charAt(i) == '*' && dp[0][i - 1]) {
@@ -2247,6 +2247,7 @@ public class Leetcode {
                         dp[i][j] = dp[i][j - 2];
                     } else {
                         dp[i][j] = dp[i][j - 2] || dp[i][j - 1] || dp[i - 1][j];
+                        //分别对应a*   没有a   只有一个a          多个a
                     }
                 }
             }
@@ -2254,5 +2255,31 @@ public class Leetcode {
         return dp[m][n];
     }
 
+    //62. Unique Paths
+    /**
+     *  机器人过河
+     *  好久没有   Runtime: 0 ms, faster than 100.00% of Java online submissions for Unique Paths.
+     * Memory Usage: 31.7 MB, less than 100.00% of Java online submissions for Unique Paths.
+     */
+
+    public int uniquePaths(int m, int n) {
+        if(m == 0 || n ==0)
+            return 0;
+
+        int dp[][] = new int[n][m];
+        dp[0][0] = 1;
+        for(int i = 1; i < m; i++)
+            dp[0][i] = dp[0][i-1];
+        for(int i = 1; i < n; i++)
+            dp[i][0] = dp[i-1][0];
+
+        for(int i = 1; i < n; i++){
+            for(int j = 1; j < m; j++)
+                dp[i][j] = dp[i-1][j]+dp[i][j-1];
+        }
+
+        return dp[n-1][m-1];
+
+    }
 
 }
