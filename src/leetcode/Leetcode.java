@@ -2280,12 +2280,89 @@ public class Leetcode {
 
         return dp[n-1][m-1];
     }
-
-
-    //146. LRU Cache
+    //11. Container With Most Water
     /**
-     *
+     *  这道接雨水的题，如果先固定一个i坐标  j = i+ 1  j < heught.length() 这样求出两柱子之间的容量  维护一个最大值  时间复杂度O （n2）
+     *  其实我们可以使用 双指针法  从首尾开始遍历  因为是要求最大容量  直接根据情况移动指针   时间复杂度 O（n）
      */
+    //下面是使用双指针法
+    public int maxArea(int[] height) {
+        int l = 0, r = height.length - 1;
+        int maxVol = 0;
+        while (l < r) {
+            int vol = Math.min(height[l], height[r]) * (r - l);
+            if (vol > maxVol) {
+                maxVol = vol;
+            }
+            if (height[l] > height[r]) {
+                r --;
+            } else {
+                l ++;
+            }
+        }
+        return maxVol;
+    }
+
+
+    //42. Trapping Rain Water
+    /** 思路一：
+     *   双指针法的思想  +  动态规划记录    常用思想  ：  对于一个数组每一个index 我们求出所需要index 左右 需要的值  进行运算
+     *   这个思想在那一道  剑指offer之中的  取出除了当前index外的所有数的乘积
+     *
+     *思路二 ：
+     *      对于两次遍历是多余的  我们还是只是  双指针法
+     *      基本思路是这样的，用两个指针从两端往中间扫，在当前窗口下，如果哪一侧的高度是小的，那么从这里开始继续扫，
+     *      如果比它还小的，肯定装水的瓶颈就是它了，可以把装水量加入结果，如果遇到比它大的，立即停止，重新判断左右窗口的大小情况，重复上面的步骤。
+     *      这里能作为停下来判断的窗口，说明肯定比前面的大了，所以目前肯定装不了水（不然前面会直接扫过去）。
+     *      这样当左右窗口相遇时，就可以结束了，因为每个元素的装水量都已经记录过了
+     */
+    public int trap(int[] height) {
+        if ( height == null|| height.length == 0){
+            return 0;
+        }
+        int dp[] = new int[height.length];
+        int flagMax = 0;
+        int result = 0;
+        for (int i = 0; i < height.length; i++){
+            dp[i] = flagMax;
+            flagMax = Math.max(height[i],flagMax);
+        }
+        flagMax =  0;
+
+        for (int i = height.length - 1; i >= 0; i--){
+            dp[i] = Math.min(flagMax,dp[i]);  //我们为了找出  index  左右两个方向之中  高度最小的
+            flagMax = Math.max(flagMax, height[i]);
+
+            int t =  dp[i] - height[i];
+            result += t > 0 ? t:0;
+        }
+        return result;
+    }
+
+    public int trap2(int[] height) {
+        if ( height == null|| height.length == 0){
+            return 0;
+        }
+        int left = 0;
+        int right = height.length - 1;
+        int result = 0;
+        while (left < right){
+
+            int minF = Math.min(height[left],height[right]);
+
+            if (height[minF] == height[left]){
+                left++;
+                while (left < right && height[left] < minF)
+                    result += minF - height[left++];
+
+            }else {
+                right++;
+                while (left < right && minF > height[right])
+                    result += minF - height[right++];
+            }
+        }
+        return result;
+    }
 
 
 }
