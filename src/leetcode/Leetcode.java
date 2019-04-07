@@ -2364,5 +2364,48 @@ public class Leetcode {
         return result;
     }
 
+    //128. Longest Consecutive Sequence
+    /**
+     *  求出数组中最长的连续子序列
+     *
+     *  可以使用hashMap 进行相邻数的遍历
+     *
+     *  使用hashSet （底层也是使用hashmap）的原理  每次取出的数要把其相邻数去掉
+     *
+     */
+    public int longestConsecutive(int[] nums) {
+
+        HashSet<Integer> hashSet = new HashSet<>();
+        for (int num : nums)  hashSet.add(num);
+
+        int res = 0;
+        for (int num : nums){
+            int pre = num - 1;
+            int next = num + 1;
+
+            while (hashSet.remove(pre)) pre--;
+            while (hashSet.remove(next)) next++;
+            res = Math.max(res,next - pre - 1);
+        }
+        return res;
+    }
+
+    public int longestConsecutive2(int[] nums) {
+        int res = 0;
+        Map<Integer, Integer> m = new HashMap<Integer, Integer>();
+        for (int num : nums) {
+            if (m.containsKey(num)) continue;
+            int left = m.containsKey(num - 1) ? m.get(num - 1) : 0;
+            int right = m.containsKey(num + 1) ? m.get(num + 1) : 0;
+            int sum = left + right + 1;
+            m.put(num, sum);
+            res = Math.max(res, sum);
+            m.put(num - left, sum);
+            m.put(num + right, sum);
+        }
+        return res;
+    }
+
+
 
 }
