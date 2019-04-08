@@ -2406,6 +2406,38 @@ public class Leetcode {
         return res;
     }
 
+    //239. Sliding Window Maximum
+    /**
+     * 双端队列  维护一个排序的窗口   窗口第一个数字即为所求
+     *  每个数据用了两次  时间复杂度是数组长度的两倍
+     * 使用
+     */
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        if (nums == null || nums.length == 0)
+            return new int[0];
+
+        int res[] = new int[nums.length - k +1];
+
+        LinkedList<Integer> deque = new LinkedList<>();
+
+        //int index = 0;
+        for (int i = 0; i < nums.length; i++){
+            if (!deque.isEmpty() && deque.peekFirst() == i - k) deque.poll();
+
+            while (!deque.isEmpty() && nums[i] > nums[deque.getLast()]) deque.removeLast();
+
+            deque.add(i);
+
+            if((i + 1) >= k) res[i + 1 - k] = nums[deque.peek()];
+
+        }
+        return res;
+
+    }
+
+
+
+
 
 
 }
