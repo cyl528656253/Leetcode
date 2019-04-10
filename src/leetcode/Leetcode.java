@@ -2432,9 +2432,52 @@ public class Leetcode {
 
         }
         return res;
-
     }
 
+    //23. Merge k Sorted Lists
+
+    /*
+    堆排序
+    分治
+     */
+    public ListNode mergeKLists(ListNode[] lists) {
+        if(lists == null || lists.length == 0)
+            return null;
+        if(lists.length == 1)
+            return lists[0];
+        return recursion(lists,0,lists.length - 1);
+    }
+    //recursion
+    public ListNode recursion(ListNode[] lists,int start,int end){
+        if(start == end)//只有一个链表
+            return lists[start];
+        if(start < end){
+            int mid = start + (end - start) / 2; //注意：这里防止整数越界的处理,start+(end-start)/2
+            ListNode l1 = recursion(lists,start,mid);
+            ListNode l2 = recursion(lists,mid + 1,end);
+            return merge2(l1,l2);
+        } else
+            return null;
+
+    }
+    //merge
+    public ListNode merge2(ListNode l1,ListNode l2){
+        ListNode head = new ListNode(0); //创建一个头结点，最后还要删掉
+        ListNode p = head;
+        while(l1 != null && l2 != null){
+            if(l1.val <= l2.val){
+                p.next = l1;
+                l1 = l1.next;
+            } else{
+                p.next = l2;
+                l2 = l2.next;
+            }
+            p = p.next;
+        }
+
+        p.next = (l1 != null) ? l1 : l2;
+        return head.next;// head的下一个节点是第一个数据结点
+    }
 
 
 
