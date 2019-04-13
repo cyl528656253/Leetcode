@@ -12,6 +12,8 @@ public class ThreadPoolDemo{
     public long  result = 0;
     public Future<Long>[] futures = new Future[coreNumber];
 
+  //  private  ExecutorService service  =  Executors.newCachedThreadPool();
+
 
     public void setNums(long[] nums){
         this.nums = nums;
@@ -21,6 +23,7 @@ public class ThreadPoolDemo{
     // newCachedTreadPool 建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程
     private  ThreadPoolExecutor cachedThreadPool = new ThreadPoolExecutor(4,10,
             1000 * 60 ,TimeUnit.DAYS,new LinkedBlockingDeque<>());
+
 
 
 

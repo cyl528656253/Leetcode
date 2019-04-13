@@ -2479,6 +2479,60 @@ public class Leetcode {
         return head.next;// head的下一个节点是第一个数据结点
     }
 
+    //72. Edit Distance
+
+    /**
+     *
+     * @param word1
+     * @param word2
+     * @return 两个单词的距离
+     *
+     * 假设自由删除插入
+     * 接下来，定义一个表达式D(i,j)。它表示从第1个字单词的第0位至第i位形成的子串和第2个单词的第0位至第j位形成的子串的编辑距离。
+     *
+     * 显然，可以计算出动态规划的初始表达式，如下:
+     *
+     * D(i,0) = i
+     *
+     * D(0,j) = j
+     *
+     * 然后，考虑动态规划的状态转移方程式，如下:
+     *
+     *                                    D(i-1, j) + 1
+     * D(i,j)=min                                 D(i, j-1) + 1 
+     *                                    D(i-1, j-1) +2    ( if  X(i) != Y(j) ) ; leetode的替换相当于删除插入
+     *                                                      D(i-1,j-1)     ( if  X(i) == Y(j) )
+
+     */
+    public int minDistance(String word1, String word2) {
+        if (word1.length()==0)
+            return word2.length();
+        //
+        if (word2.length() ==0)
+            return word1.length();
+        int[][] dp = new int[word1.length()+1][word2.length()+1];
+
+        for (int i = 1; i<= word1.length(); i++)
+            dp[i][0] = i;
+
+        for (int i = 1; i<= word2.length(); i++)
+            dp[0][i] = i;
+
+        for (int i = 1; i <= word1.length(); i++){
+            for (int j = 1; j <= word2.length(); j++){
+                int replace_step = 0;
+                if (word1.charAt(i-1) == word2.charAt(j-1))
+                    replace_step = dp[i-1][j-1];
+                else
+                    replace_step =  dp[i - 1][j - 1] + 1;
+
+                replace_step = Math.min(dp[i-1][j]+1,replace_step);
+                dp[i][j] = Math.min(replace_step,dp[i][j-1]+1);
+            }
+        }
+        return dp[word1.length()][word2.length()];
+    }
+
 
 
 

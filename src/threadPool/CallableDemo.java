@@ -12,6 +12,7 @@ public class CallableDemo implements Callable<ArrayList<Integer>>{
     private int coreNumber;
 
 
+
     public void  setCoreNumber(int coreNumber){
         this.coreNumber = coreNumber;
     }
