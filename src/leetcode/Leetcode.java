@@ -2671,6 +2671,59 @@ public class Leetcode {
     }
 
 
+    /**
+     * @param s
+     * @return
+     *32. Longest Valid Parentheses
+     *方法一 使用栈  一般对于左括号 有括号的问题  一般使用的栈  而这道题的坑点在于情况无比较多
+     * 可能是左括号比较多  可能是右括号比较多   而我们使用栈的可以记录的是左括号的位置
+     * 通过判断栈是否为空 分辨两种状况
+     * 一  栈W为空   右括号比较多   右括号比较多  使用i - begin + 1
+     * 二  栈不空   左括号比较多    使用i - 最左且多余的左括号的位置
+     *时间复杂度  O（n）  空间复杂度  栈+O（n）
+     *
+     * DP方法：
+     * 1. 状态：
+     * DP[i]：以s[i-1]为结尾的longest valid parentheses substring的长度。
+     *
+     * 2. 通项公式：
+     * s[i] = '('：
+     * DP[i] = 0
+     *
+     * s[i] = ')'：找i前一个字符的最长括号串DP[i]的前一个字符j = i-2-DP[i-1]
+     * DP[i] = DP[i-1] + 2 + DP[j]，如果j >=0，且s[j] = '('
+     * DP[i] = 0，如果j<0，或s[j] = ')'
+     *
+     */
+    public int longestValidParentheses(String s) {
+        if (s.length() == 0 || s.length() == 1)
+            return 0;
+        int result = 0;
+        Stack<Integer> stack = new Stack<>();
+        int begin = 0;
+        int end = 0;
+        int len = s.length();
+        int i;
+        for (i = 0; i < len; i++){
+            char c = s.charAt(i);
+            if (c == '(') {
+                stack.push(i);
+            }else {
+                if (stack.isEmpty()) {
+                    begin = i+1;
+                } else {
+                    stack.pop();
+                    if (stack.isEmpty())
+                        result = Math.max(result, i - begin + 1);
+                    else
+                        result = Math.max(result, i - stack.peek());
+                }
+            }
+        }
+        return result;
+    }
+
+
 
 
 
