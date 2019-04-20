@@ -2724,6 +2724,34 @@ public class Leetcode {
     }
 
 
+    /**
+     * 739. Daily Temperatures
+     *Given a list of daily temperatures T, return a list such that, for each day in the input, tells you how many days you would have to wait until a warmer temperature. If there is no future day for which this is possible, put 0 instead.
+     *
+     * For example, given the list of temperatures T = [73, 74, 75, 71, 69, 72, 76, 73], your output should be [1, 1, 4, 2, 1, 1, 0, 0].
+     *
+     * @param T
+     * @return
+     *
+     * 感觉和之前维护一个递减的栈的思路有着异曲同工之妙
+     * 栈存储的是数字的index
+     * 本题的思路是维护一个递减栈，如果有大于stack。peek的数字进来，求出他们的坐标的差，存于结果数组。
+     * 如果栈为空或者小于stack。peek  则可以入栈
+     */
+    public int[] dailyTemperatures(int[] T) {
+        Stack<Integer> stack = new Stack<>();
+        int[] ret = new int[T.length];
+        for(int i = 0; i < T.length; i++) {
+            while(!stack.isEmpty() && T[i] > T[stack.peek()]) {
+                int idx = stack.pop();
+                ret[idx] = i - idx;
+            }
+            stack.push(i);
+        }
+        return ret;
+    }
+
+
 
 
 
