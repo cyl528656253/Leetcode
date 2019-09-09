@@ -1,6 +1,6 @@
 package leetcode;
 
-import jdk.nashorn.api.tree.Tree;
+
 
 import javax.imageio.ImageTranscoder;
 import java.security.PublicKey;
@@ -181,7 +181,7 @@ public class Leetcode {
         }
         return -1;
     }
-
+/*
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode index1 = l1;
         ListNode index2 = l2;
@@ -224,6 +224,7 @@ public class Leetcode {
         }
         return result.next;
     }
+    */
 
     public int lengthOfLongestSubstring(String s) {
         int[] m = new int[128];
@@ -2753,6 +2754,85 @@ public class Leetcode {
 
 
 
+    public boolean isPalindrome2(ListNode head) {
+        if(head == null || head.next == null){
+            return true;
+        }
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast != null){
+            fast = fast.next != null ? fast.next.next: fast.next;
+            slow = slow.next;
+        }
+        slow = reverse(slow);
+        while (slow != null && head != null){
+            if (slow.val != head.val)
+                return false;
+            head = head.next;
+            slow = slow.next;
+        }
+        return true;
+    }
+
+·
+
+
+    /**
+     * 定位到要反转部分的头节点 2，head = 2；前驱结点 1，pre = 1；
+     * 当前节点的下一个节点3调整为前驱节点的下一个节点 1->3->2->4->5,
+     * 当前结点仍为2， 前驱结点依然是1，重复上一步操作。。。
+     * 1->4->3->2->5.
+     * @param head
+     * @param m
+     * @param n
+     * @return
+     */
+    public ListNode reverseBetween(ListNode head, int m, int n) {
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode pre = dummy;
+        for(int i = 1; i < m; i++){
+            pre = pre.next;
+        }
+        head = pre.next;
+        for(int i = m; i < n; i++){
+            ListNode nex = head.next;
+            head.next = nex.next;
+            nex.next = pre.next;
+            pre.next = nex;
+        }
+        return dummy.next;
+    }
+
+
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> result = new ArrayList<>();
+        if (matrix == null || matrix.length == 0)
+            return result;
+
+        int up = 0;
+        int down = matrix.length - 1;
+        int left = 0;
+        int right = matrix[0].length -1;
+
+        while (true){
+
+            for (int i = left; i <= right; i++) result.add(matrix[up][i]);
+            if (++up > down) break;
+
+            for (int i = up; i <= down; i++) result.add(matrix[i][right]);
+            if (--right < left) break;
+
+            for (int i = right; i >= left; i--) result.add(matrix[down][i]);
+            if (--down < up) break;
+
+            for (int i = down; i >= up; i--) result.add(matrix[left][i]);
+            if (++left > right) break;
+        }
+
+        return result;
+
+    }
 
 
 

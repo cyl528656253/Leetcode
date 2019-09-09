@@ -42,7 +42,7 @@ public class DataStruct {
     }
 
     //希尔排序
-    /**
+    /**9
      *这个是插入排序的修改版，根据步长由长到短分组，进行排序，直到步长为1为止，属于插入排序的一种。
      * 先由步长分组  每一组使用我们的插入排序
      */
@@ -117,20 +117,17 @@ public class DataStruct {
                 arr[t++] = left[i++];
             else
                 arr[t++] = right[j++];
-
         }
         while (i < left.length)
             arr[t++] = left[i++];
         while (j < right.length)
             arr[t++] = right[j++];
-
     }
 
     public void swap(int[] nums, int index1, int index2){
         int tmp = nums[index1];
         nums[index1] = nums[index2];
         nums[index2] = tmp;
-
     }
 
     //堆排序   最大堆的最大元素在根节点   堆中每个父节点比子节点大
@@ -150,7 +147,6 @@ public class DataStruct {
             index = j; //记录下来 value 应该放置的位置
         }
         arr[index] = value;
-
     }
 
 
